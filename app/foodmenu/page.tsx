@@ -11,9 +11,6 @@ function FoodMenu() {
         <div>
           <HeaderAdmin></HeaderAdmin>
           <FoodContainer></FoodContainer>
-          <FoodContainer></FoodContainer>
-          <FoodContainer></FoodContainer>
-          <FoodContainer></FoodContainer>
         </div>
       </AdminLayout>
     </div>

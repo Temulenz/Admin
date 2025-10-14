@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export const AddDishButton = () => {
   const [image, setImage] = useState<File | undefined>();
@@ -33,6 +33,7 @@ export const AddDishButton = () => {
     form.append("price", String(price));
     form.append("ingredients", ingredients);
     form.append("image", image); // File object
+
     try {
       const response = await fetch("http://localhost:4000/api/addDish", {
         method: "POST",
@@ -104,8 +105,8 @@ export const AddDishButton = () => {
                   placeholder="Enter price ..."
                   id="price"
                   name="price"
-                  type="number"
                   value={price}
+                  type="number"
                   onChange={priceChangeHandler}
                 />
               </div>

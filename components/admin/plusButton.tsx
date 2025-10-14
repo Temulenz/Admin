@@ -17,22 +17,8 @@ import { Button } from "@/components/ui/button";
 import { ChangeEvent, useState, useEffect } from "react";
 
 export const PlusButton = () => {
-  const [categories, setCategories] = useState<string[]>([]);
   const [newCategory, setNewCategory] = useState<string | undefined>();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-
-  const getCategories = async () => {
-    const result = await fetch("http://localhost:4000/api/addCategory");
-    const responseData = await result.json();
-    console.log({ responseData });
-    const { data } = responseData;
-    console.log(data);
-    setCategories(data);
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
 
   const newCategoryNameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setNewCategory(e.target.value);
@@ -49,7 +35,6 @@ export const PlusButton = () => {
       }),
     });
     setModalOpen(false);
-    await getCategories();
   };
 
   return (
