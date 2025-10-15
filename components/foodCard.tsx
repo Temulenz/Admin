@@ -12,7 +12,7 @@ export const FoodCard = ({
   name: string;
 }) => {
   return (
-    <div className="mx-4 relative border rounded-2xl px-4 ">
+    <div className="mx-2 relative border rounded-2xl px-4 ">
       <div className="py-4">
         <img className="w-[239px] h-[129px]" src={image} alt="Food image" />
         <div className="absolute top-7 right-8.5">

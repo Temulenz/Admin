@@ -83,7 +83,7 @@ export const EditButton = () => {
               />
             </div>
           </DialogTrigger>
-          <DialogContent className="w-[460px] h-[592px]">
+          <DialogContent className="w-[460px]">
             <DialogHeader>
               <DialogTitle>Dishes Info</DialogTitle>
             </DialogHeader>
@@ -148,15 +148,22 @@ export const EditButton = () => {
               />
             </div>
 
-            <DialogFooter>
-              <Button onClick={addFoodHandler} type="button">
-                D
-              </Button>
+            <div className="flex justify-between">
+              <button
+                type="button"
+                className="outline-solid outline-red-300 rounded py-2 px-4 "
+              >
+                <img src="trash.svg" />
+              </button>
 
-              <Button onClick={addFoodHandler} type="button">
-                Save changes
-              </Button>
-            </DialogFooter>
+              <button
+                className="py-2 px-4 bg-black rounded"
+                onClick={addFoodHandler}
+                type="button"
+              >
+                <p className="text-white">Save changes</p>
+              </button>
+            </div>
           </DialogContent>
         </form>
       </Dialog>

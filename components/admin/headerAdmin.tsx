@@ -28,10 +28,6 @@ export const HeaderAdmin = () => {
     getCategories();
   };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   const getCategories = async () => {
     const result = await fetch("http://localhost:4000/api/addCategory");
     const responseData = await result.json();
@@ -40,6 +36,10 @@ export const HeaderAdmin = () => {
     console.log(data);
     setCategories(data);
   };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <div>
