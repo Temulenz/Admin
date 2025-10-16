@@ -15,7 +15,6 @@ export const FoodContainer = () => {
   const getCategories = async () => {
     const result = await fetch("http://localhost:4000/api/addDish");
     const responseData = await result.json();
-
     const { data } = responseData;
 
     setFood(data);

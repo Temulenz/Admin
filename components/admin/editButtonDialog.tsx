@@ -3,10 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -15,11 +12,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useEffect, useState } from "react";
 
+export type CategoryType = {
+  name: string;
+  _id: string;
+};
+
 export const EditButton = () => {
+  type Food = {
+    name: string;
+    _id: string;
+    ingredients: string;
+    price: number;
+    image: File;
+  };
+
   const [image, setImage] = useState<File | undefined>();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [ingredients, setIngredients] = useState<string>("");
+
+  const [foods, setFoods] = useState<Food[]>([]);
 
   const addFoodHandler = async () => {
     if (!name || !price || !image || !ingredients) {
@@ -33,27 +45,41 @@ export const EditButton = () => {
     form.append("price", String(price));
     form.append("ingredients", ingredients);
     form.append("image", image); // File object
+  };
 
+  const getFoods = async () => {
+    const result = await fetch("http://localhost:4000/api/addDish");
+    const data = await result.json();
+    setFoods(data.data);
+  };
+
+  const deleteFood = async (_id: string) => {
     try {
       const response = await fetch("http://localhost:4000/api/addDish", {
         method: "DELETE",
-        body: form,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: _id }),
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        alert("Food created successfully!");
-        setName("");
-        setPrice(0);
-        setImage(undefined);
-        setIngredients("");
+        alert("Food Deleted");
       } else {
-        alert(data.error || "Failed to create food");
+        alert(data.error || "Cant food delete");
       }
     } catch (error) {
-      alert("Failed to create food");
+      alert("Error");
     }
+    getFoods();
   };
+
+  useEffect(() => {
+    getFoods();
+  }, []);
+
   const nameChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -149,12 +175,17 @@ export const EditButton = () => {
             </div>
 
             <div className="flex justify-between">
-              <button
-                type="button"
-                className="outline-solid outline-red-300 rounded py-2 px-4 "
-              >
-                <img src="trash.svg" />
-              </button>
+              {foods.map((food) => (
+                <div key={food._id}>
+                  <button
+                    onClick={() => deleteFood(food._id)}
+                    type="button"
+                    className="outline-solid outline-red-300 rounded py-2 px-4"
+                  >
+                    <img src="trash.svg" />
+                  </button>
+                </div>
+              ))}
 
               <button
                 className="py-2 px-4 bg-black rounded"

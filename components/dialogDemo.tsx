@@ -21,6 +21,8 @@ export const AddDishButton = () => {
   const [price, setPrice] = useState<number>(0);
   const [ingredients, setIngredients] = useState<string>("");
 
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   const addFoodHandler = async () => {
     if (!name || !price || !image || !ingredients) {
       alert("All fields are required");
@@ -61,8 +63,11 @@ export const AddDishButton = () => {
     setPrice(Number(e.target.value));
   };
   const fileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImage(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setImage(file);
+      const preview = URL.createObjectURL(file);
+      setPreviewUrl(preview);
     }
   };
   const ingredientsChangeHandler = (
@@ -125,16 +130,29 @@ export const AddDishButton = () => {
               </div>
             </div>
 
-            <div className="items-center   gap-3">
+            <div className="items-center   gap-3 relative">
               <Label className="py-4" htmlFor="picture">
                 Food image
               </Label>
+              <div className="w-[414px] border flex justify-center items-center h-[138px]">
+                Choose a file or drag & drop it here
+              </div>
               <Input
-                className="w-[414px]  h-[138px]"
+                className="w-[414px]  h-[138px] absolute  inset-0 opacity-0  "
                 id="picture"
                 type="file"
                 onChange={fileChangeHandler}
               />
+
+              {previewUrl && (
+                <div className="mt-2">
+                  <img
+                    src={previewUrl}
+                    alt="Selected food"
+                    className="w-full h-[180px] object-cover rounded border"
+                  />
+                </div>
+              )}
             </div>
 
             <DialogFooter>
