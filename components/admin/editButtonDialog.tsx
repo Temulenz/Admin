@@ -30,7 +30,6 @@ export const EditButton = () => {
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [ingredients, setIngredients] = useState<string>("");
-
   const [foods, setFoods] = useState<Food[]>([]);
 
   const addFoodHandler = async () => {

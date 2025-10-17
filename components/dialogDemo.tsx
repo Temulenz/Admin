@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -15,12 +13,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEvent, useEffect, useState } from "react";
 
-export const AddDishButton = () => {
+export type CategoryType = {
+  name: string;
+  _id: string;
+};
+
+export const AddDishButton = ({
+  categoryId,
+  refetchFoods,
+}: {
+  categoryId: string;
+  refetchFoods: () => Promise<void>;
+}) => {
   const [image, setImage] = useState<File | undefined>();
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [ingredients, setIngredients] = useState<string>("");
-
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const addFoodHandler = async () => {
@@ -34,7 +42,8 @@ export const AddDishButton = () => {
     form.append("name", name);
     form.append("price", String(price));
     form.append("ingredients", ingredients);
-    form.append("image", image); // File object
+    form.append("image", image);
+    form.append("categoryId", categoryId);
 
     try {
       const response = await fetch("http://localhost:4000/api/addDish", {
@@ -44,6 +53,7 @@ export const AddDishButton = () => {
 
       const data = await response.json();
       if (response.ok) {
+        await refetchFoods();
         alert("Food created successfully!");
         setName("");
         setPrice(0);
