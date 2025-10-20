@@ -29,6 +29,7 @@ export const FoodContainer = ({
 
           {foods.map((food: FoodType) => (
             <FoodCard
+              id={food._id!}
               key={food._id}
               comment={food.ingredients}
               image={food.imageUrl}

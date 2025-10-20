@@ -17,7 +17,7 @@ export type CategoryType = {
   _id: string;
 };
 
-export const EditButton = () => {
+export const EditButton = ({ id }: { id: string }) => {
   type Food = {
     name: string;
     _id: string;
@@ -174,17 +174,15 @@ export const EditButton = () => {
             </div>
 
             <div className="flex justify-between">
-              {foods.map((food) => (
-                <div key={food._id}>
-                  <button
-                    onClick={() => deleteFood(food._id)}
-                    type="button"
-                    className="outline-solid outline-red-300 rounded py-2 px-4"
-                  >
-                    <img src="trash.svg" />
-                  </button>
-                </div>
-              ))}
+              <div key={id}>
+                <button
+                  onClick={() => deleteFood(id)}
+                  type="button"
+                  className="outline-solid outline-red-300 rounded py-2 px-4"
+                >
+                  <img src="trash.svg" />
+                </button>
+              </div>
 
               <button
                 className="py-2 px-4 bg-black rounded"

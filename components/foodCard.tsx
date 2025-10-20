@@ -1,11 +1,13 @@
 import { EditButton } from "./admin/editButtonDialog";
 
 export const FoodCard = ({
+  id,
   image,
   name,
   price,
   comment,
 }: {
+  id: string;
   image: string;
   price: number;
   comment: string;
@@ -16,7 +18,7 @@ export const FoodCard = ({
       <div className="py-4">
         <img className="w-[239px] h-[129px]" src={image} alt="Food image" />
         <div className="absolute top-7 right-8.5">
-          <EditButton />
+          <EditButton id={id} />
         </div>
       </div>
       <div className="text-4 flex justify-between">
