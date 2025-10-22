@@ -47,20 +47,23 @@ export const EditButton = ({ id }: { id: string }) => {
   };
 
   const getFoods = async () => {
-    const result = await fetch("http://localhost:4000/api/addDish");
+    const result = await fetch("https://be-seven-blond.vercel.app/api/addDish");
     const data = await result.json();
     setFoods(data.data);
   };
 
   const deleteFood = async (_id: string) => {
     try {
-      const response = await fetch("http://localhost:4000/api/addDish", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: _id }),
-      });
+      const response = await fetch(
+        "https://be-seven-blond.vercel.app/api/addDish",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: _id }),
+        }
+      );
 
       const data = await response.json();
 

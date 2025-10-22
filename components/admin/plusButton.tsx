@@ -24,7 +24,7 @@ export const PlusButton = () => {
     setNewCategory(e.target.value);
   };
   const createCategoryHandler = async () => {
-    await fetch("http://localhost:4000/api/addCategory", {
+    await fetch("https://be-seven-blond.vercel.app/api/addCategory", {
       method: "POST",
       mode: "no-cors",
       headers: {

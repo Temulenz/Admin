@@ -16,7 +16,7 @@ export const HeaderAdmin = () => {
   const [categories, setCategories] = useState<Categor[]>([]);
 
   const deleteCategories = async (_id: string) => {
-    await fetch("http://localhost:4000/api/addCategory", {
+    await fetch("https://be-seven-blond.vercel.app/api/addCategory", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,9 @@ export const HeaderAdmin = () => {
   };
 
   const getCategories = async () => {
-    const result = await fetch("http://localhost:4000/api/addCategory");
+    const result = await fetch(
+      "https://be-seven-blond.vercel.app/api/addCategory"
+    );
     const responseData = await result.json();
     console.log({ responseData });
     const { data } = responseData;

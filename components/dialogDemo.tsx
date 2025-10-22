@@ -46,10 +46,13 @@ export const AddDishButton = ({
     form.append("categoryId", categoryId);
 
     try {
-      const response = await fetch("http://localhost:4000/api/addDish", {
-        method: "POST",
-        body: form,
-      });
+      const response = await fetch(
+        "https://be-seven-blond.vercel.app/api/addDish",
+        {
+          method: "POST",
+          body: form,
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {

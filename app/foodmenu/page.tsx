@@ -16,7 +16,9 @@ function FoodMenu() {
   const [foods, setFoods] = useState<any[]>([]);
 
   const getCategories = async () => {
-    const result = await fetch("http://localhost:4000/api/addCategory");
+    const result = await fetch(
+      "https://be-seven-blond.vercel.app/api/addCategory"
+    );
     const responseData = await result.json();
     console.log({ responseData });
     const { data } = responseData;
@@ -25,7 +27,7 @@ function FoodMenu() {
   };
 
   const getFoods = async () => {
-    const result = await fetch("http://localhost:4000/api/addDish");
+    const result = await fetch("https://be-seven-blond.vercel.app/api/addDish");
     const responseData = await result.json();
     setFoods(responseData.data);
   };
